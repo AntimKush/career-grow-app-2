@@ -1,0 +1,51 @@
+﻿@model IEnumerable<MenuItem>
+
+<ul class="navbar-nav flex-grow-1">
+    @foreach (var item in Model)
+    {
+        @if (item.Children != null && item.Children.Any())
+        {
+            <!-- Parent Dropdown Item -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    @item.Title
+                </a>
+                <ul class="dropdown-menu">
+                    @{ await RenderChildren(item.Children); }
+                </ul>
+            </li>
+        }
+        else
+        {
+            <!-- Standard Single Link -->
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-controller="@item.ControllerName" asp-action="@item.ActionName">@item.Title</a>
+            </li>
+        }
+    }
+</ul>
+
+<!-- Local Helper Function for Multi-Level Nested Dropdowns -->
+@{
+    async Task RenderChildren(List<MenuItem> children)
+    {
+        foreach (var child in children)
+        {
+            if (child.Children != null && child.Children.Any())
+            {
+                <li class="dropdown-submenu dropend">
+                    <a class="dropdown-item dropdown-toggle" href="#">@child.Title</a>
+                    <ul class="dropdown-menu">
+                        @{ await RenderChildren(child.Children); }
+                    </ul>
+                </li>
+            }
+            else
+            {
+                <li>
+                    <a class="dropdown-item" asp-controller="@child.ControllerName" asp-action="@child.ActionName">@child.Title</a>
+                </li>
+            }
+        }
+    }
+}
