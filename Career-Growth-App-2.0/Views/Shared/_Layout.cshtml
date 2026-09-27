@@ -3,41 +3,116 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Career_Growth_App_2._0</title>
+    <title>@ViewData["Title"] -Career_Growth_App_2._0</title>
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/custom.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Career_Growth_App_2._0.styles.css" asp-append-version="true" />
+    <style>
+        /* Small inline polish for header/footer layout */
+        .brand-name { font-weight:700; letter-spacing:0.2px; }
+        .profile-avatar { width:36px; height:36px; object-fit:cover; border-radius:50%; }
+    </style>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Career_Growth_App_2._0</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand brand-name text-white" asp-area="" asp-controller="Home" asp-action="Index">Career Growth</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    @await Component.InvokeAsync("Navigation")
+
+                <div class="collapse navbar-collapse" id="mainNav">
+                    <div class="me-auto">
+                        @await Component.InvokeAsync("Navigation")
+                    </div>
+
+                    <ul class="navbar-nav ms-auto align-items-center">
+                        <li class="nav-item me-3 d-none d-lg-block">
+                            <form class="d-flex" role="search" method="get" asp-controller="Jobs" asp-action="Index">
+                                <input class="form-control form-control-sm" type="search" name="q" placeholder="Search jobs" aria-label="Search">
+                            </form>
+                        </li>
+
+                        @if (User.Identity?.IsAuthenticated == true)
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle d-flex align-items-center text-white" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="https://picsum.photos/seed/@(User.Identity.Name)/48/48" class="profile-avatar me-2" alt="avatar" />
+                                    <span class="d-none d-sm-inline">@User.Identity.Name</span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+                                    <li><a class="dropdown-item" asp-controller="Profile" asp-action="Index">Profile</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Applications" asp-action="Index">My Applications</a></li>
+                                    <li><hr class="dropdown-divider" /></li>
+                                    <li><a class="dropdown-item text-danger" asp-controller="Account" asp-action="Logout">Sign out</a></li>
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="btn btn-outline-light btn-sm me-2" asp-controller="Account" asp-action="Login">Sign in</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-light btn-sm" asp-controller="Account" asp-action="Register">Register</a>
+                            </li>
+                        }
+                    </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - Career_Growth_App_2._0 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <main class="flex-grow-1">
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+            <div class="container-fluid">
+                <div class="app-shell">
+                    <aside class="sidebar">
+                        @await Component.InvokeAsync("Navigation")
+                        <div class="mt-4">
+                            <a class="btn btn-sm btn-outline-light w-100 mb-2" asp-controller="Profile" asp-action="Index"><i class="bi bi-person-circle"></i> Profile</a>
+                            <a class="btn btn-sm btn-outline-light w-100" asp-controller="Account" asp-action="Logout"><i class="bi bi-box-arrow-right"></i> Sign out</a>
+                        </div>
+                    </aside>
+
+                    <div class="flex-grow-1">
+                        <div class="container py-4">
+                            @RenderBody()
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="container py-4">
+                @RenderBody()
+            </div>
+        }
+    </main>
+
+    <footer class="mt-auto bg-dark text-light py-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div>
+                <strong>Career Growth</strong>
+                <div class="small text-muted">Connecting talent with opportunity</div>
+            </div>
+            <div class="text-end small">
+                <div>© @DateTime.Now.Year Career Growth</div>
+                <div><a class="text-decoration-none text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> · <a class="text-decoration-none text-light" href="/Terms">Terms</a></div>
+            </div>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/custom.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

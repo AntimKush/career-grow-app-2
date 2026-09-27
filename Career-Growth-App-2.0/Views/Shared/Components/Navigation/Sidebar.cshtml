@@ -1,0 +1,52 @@
+@model IEnumerable<MenuItem>
+
+<nav class="nav flex-column">
+    @foreach (var item in Model)
+    {
+        if (item.Children != null && item.Children.Any())
+        {
+            <div class="nav-item">
+                <a class="nav-link text-muted d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#sub-@item.Id" role="button" aria-expanded="false">
+                    <span>@item.Title</span>
+                    <i class="bi bi-chevron-down"></i>
+                </a>
+                <div class="collapse ps-2" id="sub-@item.Id">
+                    <ul class="nav flex-column">
+                        @{ await RenderChildren(item.Children); }
+                    </ul>
+                </div>
+            </div>
+        }
+        else
+        {
+            <a class="nav-link text-muted" asp-controller="@item.ControllerName" asp-action="@item.ActionName">@item.Title</a>
+        }
+    }
+
+@{
+    async Task RenderChildren(List<MenuItem> children)
+    {
+        foreach (var child in children)
+        {
+            if (child.Children != null && child.Children.Any())
+            {
+                <li class="nav-item">
+                    <a class="nav-link text-muted d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#sub-@child.Id" role="button" aria-expanded="false">
+                        <span>@child.Title</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </a>
+                    <div class="collapse ps-3" id="sub-@child.Id">
+                        <ul class="nav flex-column">
+                            @{ await RenderChildren(child.Children); }
+                        </ul>
+                    </div>
+                </li>
+            }
+            else
+            {
+                <li class="nav-item"><a class="nav-link text-muted" asp-controller="@child.ControllerName" asp-action="@child.ActionName">@child.Title xxx</a></li>
+            }
+        }
+    }
+}
+</nav>

@@ -1,0 +1,67 @@
+@model Career_Growth_App_2._0.Models.PagedResult<Career_Growth_App_2._0.Models.Candidate>
+
+@{
+    ViewData["Title"] = "Candidates";
+}
+
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Candidates</h2>
+        <div class="small text-muted">Total: @Model.TotalItems</div>
+    </div>
+
+    <div class="table-responsive mb-3">
+        <table class="table table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Title</th>
+                    <th>Location</th>
+                    <th>Experience</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Applied On</th>
+                    <th>Status</th>
+                    <th>Source</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var c in Model.Items)
+                {
+                    <tr>
+                        <td>@c.Id</td>
+                        <td>@c.FullName</td>
+                        <td>@c.Title</td>
+                        <td>@c.Location</td>
+                        <td>@c.ExperienceYears yrs</td>
+                        <td>@c.Email</td>
+                        <td>@c.Phone</td>
+                        <td>@c.AppliedOn.ToLocalTime().ToString("yyyy-MM-dd")</td>
+                        <td><span class="badge @(c.Status == "Selected" ? "bg-success" : c.Status == "Interview" ? "bg-info" : c.Status == "Rejected" ? "bg-danger" : "bg-secondary")">@c.Status</span></td>
+                        <td>@c.Source</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Pagination -->
+    <nav aria-label="Candidates pagination">
+        <ul class="pagination">
+            @{ var prev = Model.Page - 1; var next = Model.Page + 1; }
+            <li class="page-item @(Model.Page == 1 ? "disabled" : "")">
+                <a class="page-link" href="?page=@prev&pageSize=@Model.PageSize">Previous</a>
+            </li>
+
+            @for (int p = 1; p <= Model.TotalPages; p++)
+            {
+                <li class="page-item @(p == Model.Page ? "active" : "")"><a class="page-link" href="?page=@p&pageSize=@Model.PageSize">@p</a></li>
+            }
+
+            <li class="page-item @(Model.Page >= Model.TotalPages ? "disabled" : "")">
+                <a class="page-link" href="?page=@next&pageSize=@Model.PageSize">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>

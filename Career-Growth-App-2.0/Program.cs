@@ -5,6 +5,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// Register application services
+builder.Services.AddScoped<Career_Growth_App_2._0.Services.IMetricsService, Career_Growth_App_2._0.Services.MetricsService>();
+
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).
     AddCookie(options =>
     {

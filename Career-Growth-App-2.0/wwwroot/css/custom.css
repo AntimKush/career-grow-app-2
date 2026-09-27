@@ -1,0 +1,188 @@
+/* Fresh job-portal theme: professional, readable, Bootstrap-first
+   Minimal overrides on top of Bootstrap to keep layout and components stable. */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+:root{
+  --bg: #f6f9fb;
+  --card-bg: #ffffff;
+  --muted: #6c7a89;
+  --text: #0f1720;
+  --accent: #0d9488; /* teal */
+  --accent-600: #0b7f74;
+  --glass: rgba(13,148,136,0.06);
+}
+
+body{
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* Navbar */
+.navbar{
+  background: #fff;
+  border-bottom: 1px solid rgba(15,23,32,0.06);
+  box-shadow: 0 1px 0 rgba(15,23,32,0.02);
+  position: sticky;
+  top: 0;
+  z-index: 2000;
+}
+.navbar .navbar-brand{
+  font-weight: 700;
+  color: var(--text);
+}
+.navbar .nav-link{
+  color: var(--muted);
+}
+.navbar .nav-link:hover{
+  color: var(--text);
+}
+
+/* Hero / Search area */
+.hero{
+  background: linear-gradient(90deg, rgba(13,148,136,0.06), rgba(7,89,90,0.02));
+  padding: 3.5rem 0;
+  border-radius: .6rem;
+}
+.hero .search-bar{
+  background: var(--card-bg);
+  padding: 1rem;
+  border-radius: .5rem;
+  box-shadow: 0 6px 18px rgba(15,23,32,0.04);
+}
+
+/* Cards */
+.card{
+  background: var(--card-bg);
+  border-radius: .65rem;
+  box-shadow: 0 8px 24px rgba(15,23,32,0.04);
+  border: none;
+}
+.feature-card{
+  border: 1px solid rgba(13,148,136,0.06);
+}
+
+/* Buttons */
+.btn-accent{
+  background: var(--accent);
+  border-color: var(--accent-600);
+  color: #fff;
+}
+.btn-accent:hover{
+  background: var(--accent-600);
+}
+
+/* Sidebar (for logged-in users) */
+.sidebar{
+  background: var(--card-bg);
+  border-radius: .6rem;
+  padding: 1rem;
+  border: 1px solid rgba(15,23,32,0.04);
+}
+.sidebar .nav-link{
+  color: var(--muted);
+  padding: .6rem .75rem;
+  border-radius: .45rem;
+}
+.sidebar .nav-link:hover{
+  background: var(--glass);
+  color: var(--text);
+}
+.sidebar .text-muted{
+  color: var(--muted) !important;
+}
+
+/* Dropdowns */
+.dropdown-menu{
+  min-width: 12rem;
+  border-radius: .45rem;
+  box-shadow: 0 6px 22px rgba(2,6,23,0.06);
+}
+
+/* Jobs list interactions */
+.jobs-list .job-card{
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.jobs-list .job-card:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(2,6,23,0.06);
+}
+
+/* Footer */
+footer{
+  background: transparent;
+  color: var(--muted);
+  padding: 1.25rem 0;
+  border-top: 1px solid rgba(15,23,32,0.03);
+}
+
+/* Utilities */
+.badge-accent{
+  background: var(--accent);
+  color: #fff;
+}
+.text-accent{
+  color: var(--accent) !important;
+}
+.stat-number{
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: var(--text);
+}
+
+/* Small helpers */
+.profile-avatar{ width:36px; height:36px; border-radius:50%; object-fit:cover; }
+.btn{ transition: transform .12s ease, box-shadow .12s ease; }
+.btn:active{ transform: translateY(1px); }
+
+/* Animations */
+.fade-in-up { animation: fadeInUp .56s ease both; }
+@keyframes fadeInUp {
+  from { transform: translateY(14px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Hero text animation */
+.hero .lead { opacity: 0; transform: translateY(8px); animation: heroText .8s ease .15s forwards; }
+@keyframes heroText { to { opacity: 1; transform: translateY(0); } }
+
+/* Job card icon */
+.job-card .bi { font-size: 1.5rem; color: var(--accent); margin-right: .6rem; }
+/* Hero tweaks */
+.hero { background: linear-gradient(90deg, rgba(13,148,136,0.03), rgba(7,89,90,0.01)); border-radius: .6rem; }
+.hero .display-5 { color: var(--text); }
+.hero .search-bar { max-width: 900px; margin-left: auto; margin-right: auto; }
+
+/* Job card hover */
+.job-card { transition: transform .18s ease, box-shadow .18s ease; border: none; }
+.job-card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(2,6,23,0.06); }
+
+/* Featured grid */
+.job-card .text-accent { color: var(--accent); }
+
+/* Responsive tweaks */
+@media (max-width: 767px){
+  .hero .search-bar { padding: .75rem; }
+  .job-card { padding: 1rem; }
+}
+
+/* Profile dropdown: ensure it's always above hero/carousel */
+.profile-dropdown .dropdown-menu { z-index: 6000; box-shadow: 0 10px 30px rgba(2,6,23,0.12); }
+
+/* Carousel tweaks for market-recommended style: subtle fade and centered captions */
+.carousel-fade .carousel-item { transition: opacity .8s ease-in-out; }
+.carousel-caption { left: 6%; right: 6%; bottom: 20%; text-align: left; }
+.carousel-caption h2 { font-size: 2rem; font-weight: 700; color: var(--text); }
+.carousel-caption p { color: var(--muted); }
+/* Pagination styling */
+.pagination { --bs-pagination-active-bg: var(--accent); --bs-pagination-active-border: var(--accent); }
+.pagination .page-link { color: var(--muted); }
+.pagination .page-item.active .page-link { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+/* Candidate list styling */
+.list-group-item img { object-fit: cover; width: 48px; height: 48px; border-radius: 6px; }
+.list-group-item { border-radius: .5rem; margin-bottom: .5rem; border: 1px solid rgba(15,23,32,0.03); padding: .6rem .75rem; background: var(--card-bg); }
+

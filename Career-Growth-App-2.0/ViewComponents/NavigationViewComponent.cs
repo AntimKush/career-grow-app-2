@@ -52,7 +52,9 @@ namespace Career_Growth_App_2._0.ViewComponents
             // Convert Flat List into Recursive Tree Structure using LINQ
             var menuTree = BuildMenuTree(flatMenuList, null);
 
-            return View(menuTree);
+            // Choose view variant based on authentication: Sidebar for logged in, Default (navbar) for public
+            var viewName = User?.Identity?.IsAuthenticated == true ? "Sidebar" : "Default";
+            return View(viewName, menuTree);
         }
 
         private List<MenuItem> BuildMenuTree(List<MenuItem> allItems, int? parentId)

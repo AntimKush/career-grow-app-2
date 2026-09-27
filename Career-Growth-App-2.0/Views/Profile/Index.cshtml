@@ -1,0 +1,26 @@
+@using Microsoft.AspNetCore.Http
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h4>Profile</h4>
+        @if (TempData["Message"] != null)
+        {
+            <div class="alert alert-success">@TempData["Message"]</div>
+        }
+
+        <div class="mb-3">
+            <img src="@Url.Content($"~/uploads/{User.Identity.Name}.png")" alt="avatar" class="profile-avatar" onerror="this.src='https://picsum.photos/seed/@(User.Identity.Name)/80/80'" />
+        </div>
+
+        <form asp-controller="Profile" asp-action="UploadAvatar" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label class="form-label">Upload avatar</label>
+                <input class="form-control" type="file" name="avatar" accept="image/*" />
+            </div>
+            <button class="btn btn-primary">Upload</button>
+        </form>
+    </div>
+</div>

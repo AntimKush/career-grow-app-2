@@ -1,1 +1,96 @@
-﻿@User.Identity.Name
+﻿@model Career_Growth_App_2._0.Models.AdminDashboardViewModel
+
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3">Admin Dashboard</h1>
+        <div>
+            <a class="btn btn-outline-secondary btn-sm" href="/">View Site</a>
+        </div>
+    </div>
+
+    <div class="row g-3 mb-4">
+        <div class="col-sm-6 col-md-3">
+            <div class="card text-white bg-primary h-100">
+                <div class="card-body d-flex align-items-start">
+                    <div class="me-3"><i class="bi bi-folder-fill"></i></div>
+                    <div>
+                        <h6 class="card-title">Applications</h6>
+                        <div class="display-6"><span class="counter" data-target="@Model.TotalApplications">0</span></div>
+                        <div class="small">Total applications received</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+            <div class="card text-white bg-success h-100">
+                <div class="card-body d-flex align-items-start">
+                    <div class="me-3"><i class="bi bi-person-check-fill"></i></div>
+                    <div>
+                        <h6 class="card-title">Selected</h6>
+                        <div class="display-6"><span class="counter" data-target="@Model.SelectedCandidates">0</span></div>
+                        <div class="small">Candidates selected</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+            <div class="card bg-warning h-100">
+                <div class="card-body text-dark d-flex align-items-start">
+                    <div class="me-3"><i class="bi bi-briefcase-fill"></i></div>
+                    <div>
+                        <h6 class="card-title">Open Jobs</h6>
+                        <div class="display-6"><span class="counter" data-target="@Model.OpenJobs">0</span></div>
+                        <div class="small">Active job postings</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+            <div class="card bg-info h-100">
+                <div class="card-body text-dark d-flex align-items-start">
+                    <div class="me-3"><i class="bi bi-book-fill"></i></div>
+                    <div>
+                        <h6 class="card-title">Courses</h6>
+                        <div class="display-6"><span class="counter" data-target="@Model.ActiveCourses">0</span></div>
+                        <div class="small">Active courses</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-3">
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h6 class="card-title">Achievements</h6>
+                    <div class="display-6"><span class="counter" data-target="@Model.Achievements">0</span></div>
+                    <div class="small">Achievements milestones</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h6 class="card-title">Applied Count</h6>
+                    <div class="display-6"><span class="counter" data-target="@Model.AppliedCount">0</span></div>
+                    <div class="small">Applications processed</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h6 class="card-title">Quick Actions</h6>
+                    <p class="mb-1"><a class="btn btn-sm btn-primary" href="/Jobs/Create">Create Job</a> <a class="btn btn-sm btn-outline-secondary" href="/Courses/Create">Create Course</a></p>
+                    <p class="small text-muted mb-0">Use these to quickly add content to the portal.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

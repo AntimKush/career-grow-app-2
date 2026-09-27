@@ -1,3 +1,5 @@
 ﻿@{
-    Layout = "_Layout";
+    // Choose layout dynamically: logged-in users get a left-sidebar layout, public users get the public top-navbar layout
+    var isAuth = Context?.User?.Identity?.IsAuthenticated == true;
+    Layout = isAuth ? "~/Views/Shared/_LoggedInLayout.cshtml" : "~/Views/Shared/_PublicLayout.cshtml";
 }
