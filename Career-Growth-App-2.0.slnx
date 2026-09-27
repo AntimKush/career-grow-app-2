@@ -1,3 +1,5 @@
 <Solution>
   <Project Path="Career-Growth-App-2.0/Career-Growth-App-2.0.csproj" />
+  <Project Path="Career-Growth.Business/Career-Growth.Business.csproj" Id="53da2d27-1fc5-4bab-bdc9-3fe48beb2539" />
+  <Project Path="Career-Growth.Models/Career-Growth.Models.csproj" Id="663e1a34-7d10-4744-bc47-41cd55ed9cf9" />
 </Solution>

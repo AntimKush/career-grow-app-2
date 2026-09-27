@@ -1,0 +1,59 @@
+﻿@model CandidateRegistration
+<form method="post" autocomplete="off">
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Name</label>
+        <input type="text" class="form-control" aria-describedby="emailHelp" asp-for="@Model.Name">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Father Name</label>
+        <input type="text" class="form-control" asp-for="@Model.FatherName">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">DOB</label>
+        <input type="text" class="form-control" asp-for="@Model.DOB">
+
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Gender_Id</label>
+        <select class="form-control" asp-for="@Model.Gender_Id">
+            <option value="1">Male</option>
+            <option value="2">Female</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Category_Id</label>
+        <select class="form-control" asp-for="@Model.Category_Id">
+            <option value="1">ST</option>
+            <option value="2">SC</option>
+            <option value="3">OBS</option>
+        </select>
+
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Mobile_No</label>
+        <input type="text" class="form-control" asp-for="@Model.Mobile_No">
+
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="text" class="form-control" asp-for="@Model.Email">
+
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Permanent_Address</label>
+        <textarea class="form-control" asp-for="@Model.Permanent_Address"></textarea>
+
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Correspondent_Address</label>
+        <textarea class="form-control" asp-for="@Model.Correspondent_Address"></textarea>
+
+    </div>
+    <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" asp-for="@Model.Read_Disclaimer" id="Read_Disclaimer" />
+        <label class="form-check-label" for="Read_Disclaimer">I hereby submitted the details....</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+ 

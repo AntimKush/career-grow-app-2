@@ -11,4 +11,9 @@
     <PackageReference Include="Microsoft.Data.SqlClient" Version="7.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Career-Growth.Business\Career-Growth.Business.csproj" />
+    <ProjectReference Include="..\Career-Growth.Models\Career-Growth.Models.csproj" />
+  </ItemGroup>
+
 </Project>

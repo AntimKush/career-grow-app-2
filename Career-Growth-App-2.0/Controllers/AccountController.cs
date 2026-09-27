@@ -1,4 +1,5 @@
-﻿using Career_Growth_App_2._0.Models;
+﻿using Career_Growth.Business;
+using Career_Growth_App_2._0.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +10,12 @@ namespace Career_Growth_App_2._0.Controllers
 {
     public class AccountController : Controller
     {
+        private readonly IRegistrationService registrationService;
+
+        public AccountController(IRegistrationService registrationService)
+        {
+            this.registrationService = registrationService;
+        }
         public IActionResult Login()
         {
             if(User.Identity.IsAuthenticated)
@@ -43,6 +50,18 @@ namespace Career_Growth_App_2._0.Controllers
                 return RedirectToAction("Index", "Dashboard");
             }
             return View();
+        }
+        [HttpGet]
+        public IActionResult Register()
+        {
+            CandidateRegistration objRegistration = new CandidateRegistration();
+            return View(objRegistration);
+        }
+        [HttpPost]
+        public IActionResult Register(CandidateRegistration objRegistration)
+        {
+            registrationService.Save_Registration(objRegistration);
+            return View(objRegistration);
         }
     }
 }
