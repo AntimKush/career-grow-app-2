@@ -1,6 +1,11 @@
 ﻿@model CandidateRegistration
 <form method="post" autocomplete="off">
-    <div class="mb-3">
+
+    @if (TempData["Message"] != null)
+        {
+        <div class="alert alert-success">@TempData["Message"]</div>
+        }
+        <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Name</label>
         <input type="text" class="form-control" aria-describedby="emailHelp" asp-for="@Model.Name">
     </div>

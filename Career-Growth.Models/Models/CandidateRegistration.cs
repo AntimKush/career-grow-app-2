@@ -12,6 +12,7 @@
         public string Correspondent_Address { get; set; }
         public string Permanent_Address { get; set; }
         public bool Read_Disclaimer { get; set; }
+        public string IP_Address { get; set; }
 
     }
 }

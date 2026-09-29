@@ -1,4 +1,5 @@
 using Career_Growth.Business;
+using Career_Growth.DataAccess;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IRegistrationService, RegistrationService>();
+builder.Services.AddScoped<IRegistrationRepository, RegistrationRepository>();
+
 
 // Register application services
 builder.Services.AddScoped<Career_Growth_App_2._0.Services.IMetricsService, Career_Growth_App_2._0.Services.MetricsService>();

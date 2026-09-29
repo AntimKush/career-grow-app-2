@@ -60,8 +60,10 @@ namespace Career_Growth_App_2._0.Controllers
         [HttpPost]
         public IActionResult Register(CandidateRegistration objRegistration)
         {
-            registrationService.Save_Registration(objRegistration);
-            return View(objRegistration);
+            objRegistration.IP_Address = HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
+            var res=registrationService.Save_Registration(objRegistration);
+            TempData["Message"]= res;
+            return RedirectToAction("Register");
         }
     }
 }
