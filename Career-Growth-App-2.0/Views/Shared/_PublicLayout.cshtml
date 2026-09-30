@@ -119,6 +119,7 @@
 
     <script src="~/js/site.js?v=@DateTime.Now.Ticks"></script>
     <script src="~/js/custom.js?v=@DateTime.Now.Ticks"></script>
+    <partial name="_ValidationScriptsPartial" />
 
     @await RenderSectionAsync("Scripts", required: false)
 

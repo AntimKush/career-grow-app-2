@@ -1,7 +1,10 @@
-﻿namespace Career_Growth_App_2._0.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Career_Growth_App_2._0.Models
 {
     public class CandidateRegistration
     {
+        [StringLength(50,ErrorMessage ="Please Enter Name upto 50 Characters")]
         public string Name { get; set; }
         public string FatherName { get; set; }
         public string DOB { get; set; }

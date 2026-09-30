@@ -1,64 +1,102 @@
 ﻿@model CandidateRegistration
+ 
 <form method="post" autocomplete="off">
+    <div asp-validation-summary="All" class="text-danger"></div>
 
     @if (TempData["Message"] != null)
         {
-        <div class="alert alert-success">@TempData["Message"]</div>
+            <div class="alert alert-success">@TempData["Message"]</div>
         }
         <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Name</label>
-        <input type="text" class="form-control" aria-describedby="emailHelp" asp-for="@Model.Name">
+        <input type="text" class="form-control" aria-describedby="emailHelp" asp-for="Name" id="txtName">
+        <span id="lblName" class="text-success"></span>
     </div>
     <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Father Name</label>
-        <input type="text" class="form-control" asp-for="@Model.FatherName">
+        <input type="text" class="form-control" asp-for="FatherName">
     </div>
     <div class="mb-3">
         <label class="form-label">DOB</label>
-        <input type="text" class="form-control" asp-for="@Model.DOB">
+        <input type="text" class="form-control" asp-for="DOB">
 
     </div>
     <div class="mb-3">
         <label class="form-label">Gender_Id</label>
-        <select class="form-control" asp-for="@Model.Gender_Id">
+        <select class="form-control" asp-for="Gender_Id">
             <option value="1">Male</option>
             <option value="2">Female</option>
         </select>
     </div>
     <div class="mb-3">
         <label class="form-label">Category_Id</label>
-        <select class="form-control" asp-for="@Model.Category_Id">
+        <select class="form-control" asp-for=Category_Id" id="ddlCategory">
             <option value="1">ST</option>
             <option value="2">SC</option>
-            <option value="3">OBS</option>
+            <option value="3">OBC</option>
+            <option value="4">General</option>
         </select>
-
     </div>
     <div class="mb-3">
         <label class="form-label">Mobile_No</label>
-        <input type="text" class="form-control" asp-for="@Model.Mobile_No">
-
+        <input type="text" class="form-control" asp-for="Mobile_No" maxlength="10" id="txtMobileNo">
     </div>
     <div class="mb-3">
         <label class="form-label">Email</label>
-        <input type="text" class="form-control" asp-for="@Model.Email">
-
+        <input type="text" class="form-control" asp-for="Email">
     </div>
     <div class="mb-3">
         <label class="form-label">Permanent_Address</label>
-        <textarea class="form-control" asp-for="@Model.Permanent_Address"></textarea>
+        <textarea class="form-control" asp-for="Permanent_Address"></textarea>
 
     </div>
     <div class="mb-3">
         <label class="form-label">Correspondent_Address</label>
-        <textarea class="form-control" asp-for="@Model.Correspondent_Address"></textarea>
+        <textarea class="form-control" asp-for="Correspondent_Address"></textarea>
 
     </div>
     <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" asp-for="@Model.Read_Disclaimer" id="Read_Disclaimer" />
+        <input type="checkbox" class="form-check-input" asp-for="Read_Disclaimer" id="Read_Disclaimer" />
         <label class="form-check-label" for="Read_Disclaimer">I hereby submitted the details....</label>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
+   
+        
 </form>
 
- 
+@section Scripts
+{
+    <script type="text/javascript">
+        var ddlCategory;
+        var txtMobileNo;
+        var txtName;
+        var lblName;
+        $(document).ready(function(){
+            ddlCategory=$("#ddlCategory");
+            txtMobileNo=$("#txtMobileNo");
+            txtName=$("#txtName");
+            lblName=$("#lblName");
+
+            txtMobileNo.keypress(function(evt){
+
+                var charCode = (evt.which) ? evt.which : evt.keyCode;
+                if ((charCode >= 48 && charCode <= 57)) {
+
+                    return true;
+                }
+                if (charCode == 9) { return true; }
+                if (charCode == 8) { return true; }
+                else { return false; }
+            });
+
+            $(".form-control").keyup(function(){
+                //var name=$(this).val().length;
+                var r=$(this).val().toUpperCase();
+                $(this).val(r);
+                //lblName.text("You entered "+name+" character(s)");
+                //$(this).val(name);
+            });
+        });
+    </script>
+
+}
