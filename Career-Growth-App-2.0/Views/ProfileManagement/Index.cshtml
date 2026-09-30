@@ -1,0 +1,66 @@
+﻿<div class="form-group">
+    <label class="form-label" for="ddlDistricts">District</label>
+    <select class="form-control" id="ddlDistricts">
+        <option>Select District</option>
+    </select>
+</div>
+<div class="form-group">
+    <label class="form-label" for="ddlTehsils">Tehsil</label>
+    <select class="form-control" id="ddlTehsils">
+        <option>Select Tehsil</option>
+    </select>
+</div>
+<div class="form-group">
+    <label class="form-label" for="ddlVillage">Village</label>
+    <select class="form-control" id="ddlVillage">
+        <option>Select Village</option>
+    </select>
+</div>
+@section Scripts
+{
+<script>
+    var ddlDistricts;
+    $(document).ready(function(){
+        ddlDistricts=$("#ddlDistricts");
+        Get_Districs();
+
+            ddlDistricts.change(function(){
+                Get_Tehsils($(this).val());
+            });
+
+    });
+    function Get_Districs()
+    {
+        $.ajax({
+        url:"Masters/Get_Districts",
+        type:"GET",
+        success:function(response)
+        {
+            $.each(response, function (index, item) {
+
+            ddlDistricts.append(
+            $("<option></option>")
+                .val(index)
+                .text(item)
+            );
+
+            });
+            }
+        });
+    }
+    function Get_Tehsils(districtId)
+    {
+       $.ajax({
+            url:"Masters/Get_Tehsils_By_District_Id?District_Id="+districtId,
+            type:"GET",
+            success:function(response)
+            {
+                $("#ddlTehsils").empty();
+                $.each(response,function(index,item){
+                    $("#ddlTehsils").append("<option value="+index+">"+item+"</option>");
+                });
+            }
+       });
+    }
+</script>
+}
